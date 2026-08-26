@@ -1,0 +1,37 @@
+﻿flowchart TD
+Vendedor(["Vendedor"])
+Administrador(["Administrador"])
+TimeEstoque(["Time de Estoque"])
+
+subgraph Sistema["Sistema de Vendas e Estoque"]
+VendasUI["[Apresentação] Portal de Vendas"]
+AdminUI["[Apresentação] Backoffice de Produtos"]
+EstoqueUI["[Apresentação] Portal de Estoque"]
+Gateway["[Apresentação] API Gateway"]
+PedidosService["[Domínio] Serviço de Pedidos"]
+ProdutosService["[Domínio] Serviço de Catálogo"]
+EstoqueService["[Domínio] Serviço de Estoque"]
+Notification["[Domínio] Notificador"]
+DB[("[Dados] Banco de Dados")]
+Email["Serviço de Notificações"]
+end
+
+Vendedor -->|registra pedido| VendasUI
+Administrador -->|cadastra e remove produtos| AdminUI
+TimeEstoque -->|baixa saídas e registra entradas| EstoqueUI
+
+VendasUI -->|chama| Gateway
+AdminUI -->|chama| Gateway
+EstoqueUI -->|chama| Gateway
+
+Gateway -->|cria e consulta pedidos| PedidosService
+Gateway -->|cadastra e remove produtos| ProdutosService
+Gateway -->|consulta e atualiza estoque| EstoqueService
+
+PedidosService -->|consulta produtos| ProdutosService
+PedidosService -->|consulta e atualiza estoque| EstoqueService
+ProdutosService -->|lê e grava| DB
+PedidosService -->|lê e grava| DB
+EstoqueService -->|lê e grava| DB
+EstoqueService -->|dispara| Notification
+Notification -->|envia e-mail| Email
