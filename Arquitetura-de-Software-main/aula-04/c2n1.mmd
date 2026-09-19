@@ -1,0 +1,13 @@
+﻿flowchart LR
+Vendedor(["Vendedor"])
+Administrador(["Administrador"])
+TimeEstoque(["Time de Estoque"])
+Cliente(["Cliente"])
+Sistema["Sistema de Vendas e Estoque"]
+Email["Serviço de Notificações"]
+
+Cliente -->|solicita produto| Vendedor
+Vendedor -->|registra pedido por telefone ou encontro presencial| Sistema
+Administrador -->|cadastra e remove produtos| Sistema
+TimeEstoque -->|controla disponibilidade, baixa de saída e registra entrada| Sistema
+Sistema -->|notifica movimentações| Email

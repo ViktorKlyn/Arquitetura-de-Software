@@ -1,0 +1,15 @@
+flowchart TD
+subgraph API["API de Biblioteca"]
+Catalog["Catálogo<br>lista livros e busca por categoria"]
+Loan["Empréstimo<br>registra retirada e devolução"]
+Notification["Lembretes<br>dispara avisos de prazo"]
+Auth["Autenticação<br>valida aluno e bibliotecário"]
+end
+
+Email["Servidor de e-mail externo"]
+
+Auth -->|valida acesso| Catalog
+Auth -->|valida acesso| Loan
+Catalog -->|consulta disponibilidade| Loan
+Loan -->|ativa lembrete| Notification
+Notification -->|envia e-mail| Email

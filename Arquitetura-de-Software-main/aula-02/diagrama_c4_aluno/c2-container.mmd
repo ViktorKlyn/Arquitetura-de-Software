@@ -1,0 +1,19 @@
+flowchart TD
+Aluno(["Aluno"])
+Bibliotecario(["Bibliotecário"])
+
+subgraph Sistema["Sistema de Biblioteca Escolar"]
+Portal["Portal do Aluno"]
+Painel["Painel do Bibliotecário"]
+API["API de Gestão"]
+DB[("Banco de Dados")]
+end
+
+Email["Serviço de e-mail"]
+
+Aluno -->|consulta e reserva| Portal
+Bibliotecario -->|cadastra e controla| Painel
+Portal -->|solicita dados| API
+Painel -->|solicita dados| API
+API -->|salva e consulta| DB
+API -->|envia lembrete| Email

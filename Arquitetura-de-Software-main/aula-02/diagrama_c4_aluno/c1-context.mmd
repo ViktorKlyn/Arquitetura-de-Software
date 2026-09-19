@@ -1,0 +1,9 @@
+flowchart LR
+Aluno(["Aluno<br>consulta livros e realiza empréstimo"])
+Bibliotecario(["Bibliotecário<br>cadastra livros e controla reservas"])
+Sistema["Sistema de Biblioteca Escolar"]
+Email["Serviço de e-mail"]
+
+Aluno -->|consulta e retira livro| Sistema
+Bibliotecario -->|cadastra e gerencia acervo| Sistema
+Sistema -->|envia confirmação e lembrete| Email

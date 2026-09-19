@@ -1,0 +1,52 @@
+classDiagram
+class Usuario {
+    - id
+    - nome
+    - email
+    + login()
+    + logout()
+}
+
+class Aluno {
+    + consultarLivro()
+    + reservarLivro()
+    + devolverLivro()
+}
+
+class Bibliotecario {
+    + cadastrarLivro()
+    + registrarEmprestimo()
+    + consultarHistorico()
+}
+
+class Livro {
+    - codigo
+    - titulo
+    - categoria
+    - disponivel
+    + verificarDisponibilidade()
+}
+
+class Emprestimo {
+    - dataEmprestimo
+    - dataDevolucao
+    - status
+    + registrarEmprestimo()
+    + devolver()
+}
+
+class Notificacao {
+    + enviarLembrete(emprestimo)
+}
+
+Usuario <|-- Aluno
+Usuario <|-- Bibliotecario
+Aluno --> Emprestimo: realiza
+Bibliotecario --> Livro: cadastra
+Livro --> Emprestimo: é usado em
+Emprestimo --> Notificacao: gera
+Notificacao --> EmailService: envia
+
+class EmailService {
+    + enviarEmail(destinatario, mensagem)
+}
